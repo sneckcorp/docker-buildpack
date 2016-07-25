@@ -1,0 +1,22 @@
+version: '2'
+services:
+  kafka:
+  image: sneck/kafka
+  hostname: kafka
+  links:
+    - zk1
+  environment:
+    KAFKA_BROKER_ID: 0
+    KAFKA_ADVERTISED_HOST_NAME: "192.168.0.101"
+    ZOOKEEPER_CONNECTION_STRING: "zk1:2181"
+  ports:
+    - "9092:9092"
+  restart: always
+  zk1:
+    image: sneck/zookeeper
+    hostname: zk1
+    environment:
+      ZK_MYID: 1
+    ports:
+      - "2181:2181"
+    restart: always
