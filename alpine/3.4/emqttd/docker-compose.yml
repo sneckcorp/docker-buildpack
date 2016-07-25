@@ -1,0 +1,9 @@
+emqttd:
+  image: sneck/emqttd
+  hostname: emqttd
+  ports:
+    - "1883:1883"
+    - "8883:8883"
+    - "8083:8083"
+    - "18083:18083"
+  restart: always
