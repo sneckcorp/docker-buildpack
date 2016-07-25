@@ -2,5 +2,3 @@ version: '2'
 services:
   kong:
     image: mashape/kong
-    volumes:
-      - ./etc/kong:/etc/kong

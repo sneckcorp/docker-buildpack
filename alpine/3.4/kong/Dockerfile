@@ -1,6 +1,7 @@
 FROM alpine:3.4
 
 ARG KONG_VERSION
+
 ENV KONG_VERSION=${KONG_VERSION:-0.8.3} \
     OPENRESTY_VERSION=1.9.7.5 \
     LUAROCKS_VERSION=2.3.0 \
@@ -8,12 +9,12 @@ ENV KONG_VERSION=${KONG_VERSION:-0.8.3} \
     LUAROCKS_INSTALL="luarocks install"
 
 RUN echo "==> Installing dependencies..." \
- && apk update \
  && apk add --no-cache --virtual=build-dependencies \
     make gcc musl-dev \
     pcre-dev openssl-dev zlib-dev ncurses-dev readline-dev \
-    curl perl e2fsprogs-dev wget git bash \
- && cd /tmp \
+    curl perl e2fsprogs-dev wget git \
+ && mkdir -p /tmp/ngx_openresty \
+ && cd /tmp/ngx_openresty \
  && echo "==> Downloading OpenResty..." \
  && curl -sSL http://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz | tar -xz \
  && cd openresty-* \
@@ -70,9 +71,9 @@ RUN echo "==> Installing dependencies..." \
  && apk add --no-cache \
     libpcrecpp libpcre16 libpcre32 openssl libssl1.0 pcre libgcc libstdc++ e2fsprogs-dev dnsmasq bash \
  && echo "user=root" >> /etc/dnsmasq.conf \
- && rm -rf "/tmp/"* \
+ && rm -rf "/tmp/"*
 
-COPY etc/kong /etc/kong/
+COPY etc/kong /etc/kong
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 VOLUME ["/etc/kong"]
