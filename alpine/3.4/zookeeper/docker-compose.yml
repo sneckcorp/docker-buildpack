@@ -1,0 +1,36 @@
+zk1:
+  image: sneck/zookeeper:3.5.1-alpha
+  hostname: zk1
+  ports:
+    - "2181:2181"
+  environment:
+    ZK_MYID: 1
+    ZK_STANDALONE_DISABLED: "true"
+    JMXDISABLE: "true"
+  restart: always
+zk2:
+  image: sneck/zookeeper:3.5.1-alpha
+  hostname: zk2
+  ports:
+    - "2181"
+  links:
+    - zk1
+  environment:
+    ZK_MYID: 2
+    ZK_STANDALONE_DISABLED: "true"
+    ZK_SERVERS: "zk1:2181"
+    JMXDISABLE: "true"
+  restart: always
+zk3:
+  image: sneck/zookeeper:3.5.1-alpha
+  hostname: zk2
+  ports:
+    - "2181"
+  links:
+    - zk1
+  environment:
+    ZK_MYID: 3
+    ZK_STANDALONE_DISABLED: "true"
+    ZK_SERVERS: "zk1:2181"
+    JMXDISABLE: "true"
+  restart: always
