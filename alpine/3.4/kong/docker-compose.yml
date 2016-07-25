@@ -1,4 +1,4 @@
 version: '2'
 services:
   kong:
-    image: mashape/kong
+    image: sneck/kong
