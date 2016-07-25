@@ -1,0 +1,36 @@
+version: '2'
+services:
+  zk1:
+    image: sneck/exhibitor
+    hostname: zk1
+    environment:
+      ZK_MYID: 1
+      ZK_ENSEMBLE_SIZE: 3
+      ZK_SERVERS: "1:zk1,2:zk2,3:zk3"
+    external_links:
+      - zk2
+      - zk3
+    ports:
+      - "2181:2181"
+      - "8181:8181"
+    restart: always
+  zk2:
+    image: sneck/exhibitor
+    hostname: zk2
+    environment:
+      ZK_MYID: 2
+      ZK_ENSEMBLE_SIZE: 3
+      ZK_SERVERS: "1:zk1,2:zk2,3:zk3"
+    ports:
+      - "2182:2181"
+    restart: always
+  zk3:
+    image: sneck/exhibitor
+    hostname: zk3
+    environment:
+      ZK_MYID: 3
+      ZK_ENSEMBLE_SIZE: 3
+      ZK_SERVERS: "1:zk1,2:zk2,3:zk3"
+    ports:
+      - "2183:2181"
+    restart: always
