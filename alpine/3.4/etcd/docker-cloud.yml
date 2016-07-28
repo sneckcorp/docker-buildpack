@@ -1,0 +1,23 @@
+lb:
+  image: dockercloud/haproxy
+  target_num_containers: 1
+  autodestroy: always
+  links:
+    - etcd
+  ports:
+    - "2379:2379"
+  roles:
+    - global
+etcd:
+  image: sneck/etcd
+  target_num_containers: 3
+  autodestroy: always
+  environment:
+    - DOCKER_INFRA=DOCKERCLOUD
+    - ETCD_DATA_DIR=/data
+    - ETCD_TOKEN=<ETCD_TOKEN>
+    - DOCKERCLOUD_USER=<DOCKERCLOUD USERNAME>
+    - DOCKERCLOUD_APIKEY=<DOCKERCLOUD APIKEY OR PASSWORD>
+    - TCP_PORTS=2379
+  volumes:
+    - /data/etcd:/data
