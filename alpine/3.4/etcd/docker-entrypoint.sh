@@ -28,7 +28,7 @@ elif [ "$DOCKER_INFRA" = "DOCKERCLOUD" ]; then
 
   apk del jq
 else
-  ETCD_IP_V4=$(hostname -i)
+  ETCD_IP_V4=`ip -4 addr show scope global dev eth0 | grep inet | head -1 | awk '{print \$2}' | cut -d / -f 1`
   ETCD_INSTANCE_ID=$(hostname)
 fi
 
