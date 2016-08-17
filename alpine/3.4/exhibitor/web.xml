@@ -11,12 +11,19 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>admin</role-name>
+            <role-name>zk</role-name>
         </auth-constraint>
     </security-constraint>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>A Protected Page</web-resource-name>
+            <url-pattern>/exhibitor/v1/cluster/state</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
     <security-role>
-        <role-name>admin</role-name>
+        <role-name>zk</role-name>
     </security-role>
 
     <login-config>

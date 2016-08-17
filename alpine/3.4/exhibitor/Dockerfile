@@ -1,4 +1,4 @@
-FROM sneck/zookeeper
+FROM sneck/zookeeper:3.4
 
 ARG EXHIBITOR_VERSION
 
