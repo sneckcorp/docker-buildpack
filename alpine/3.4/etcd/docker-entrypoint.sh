@@ -4,7 +4,7 @@ if [ "$DOCKER_INFRA" = "AWS" ]; then
   ETCD_IP_V4=$(curl http://169.254.169.254/latest/meta-data/local-ipv4);
   ETCD_INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id);
 elif [ "$DOCKER_INFRA" = "DOCKERCLOUD" ]; then
-  apk add --no-cache jq
+  apk add --no-cache -q --no-progress jq
   CONTAINER_FILE="container.json"
   DOCKERCLOUD_PASS=${DOCKERCLOUD_PASS:-$DOCKERCLOUD_APIKEY}
 

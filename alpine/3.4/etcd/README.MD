@@ -18,4 +18,4 @@ Then you can use 812bf4a88df43da746900a93f1633233 as a token
 
 And your docker run string will be:
 
-    docker run -d -e ETCD_TOKEN=812bf4a88df43da746900a93f1633233 sneck/etcd-aws
+    docker run -d -e ETCD_TOKEN=812bf4a88df43da746900a93f1633233 sneck/etcd
