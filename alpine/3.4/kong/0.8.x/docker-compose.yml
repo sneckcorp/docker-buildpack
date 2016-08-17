@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  kong:
+    image: sneck/kong:0.8
+    environment:
+      KONG_DATABASE: "postgres"
+      KONG_POSTGRES_HOST: "database"
+      KONG_POSTGRES_USER: "kong"
+      KONG_POSTGRES_PASSWORD: "kong"
+      KONG_POSTGRES_DATABASE: "kong"
+    ports:
+      - "8000"
+      - "8443"
+      - "8001"
+    links:
+      - database
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: "kong"
+      POSTGRES_DB: "kong"
+      POSTGRES_PASSWORD: "kong"
+    ports:
+      - "5432:5432"
