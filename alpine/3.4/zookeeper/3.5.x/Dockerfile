@@ -3,7 +3,7 @@ FROM java:8-alpine
 ARG ZK_VERSION
 ARG ZK_HOME
 
-ENV ZK_VERSION=${ZK_VERSION:-3.4.8}
+ENV ZK_VERSION=${ZK_VERSION:-3.5.2-alpha}
 ENV ZK_HOME=${ZK_HOME:-/opt/zookeeper}
 
 RUN apk add --no-cache --virtual=build-dependencies wget \
@@ -20,13 +20,12 @@ RUN apk add --no-cache --virtual=build-dependencies wget \
     \
     && sed "s#/tmp/zookeeper#$ZK_HOME/data#g" $ZK_HOME/conf/zoo_sample.cfg > $ZK_HOME/conf/zoo.cfg \
     && apk del build-dependencies \
+    \
     && rm -rf /tmp/*
-
-EXPOSE 2181 2888 3888
 
 VOLUME ["$ZK_HOME/conf", "${ZK_HOME}/data"]
 
-WORKDIR "$ZK_HOME"
+EXPOSE 2181 2888 3888
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

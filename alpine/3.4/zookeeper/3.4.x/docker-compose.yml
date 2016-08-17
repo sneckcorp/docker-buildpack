@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  zookeeper-1:
+    image: sneck/zookeeper:3.4
+    environment:
+      ZK_MYID: 1
+      ZK_MAX_SERVERS: 3
+    restart: always
+  zookeeper-2:
+    image: sneck/zookeeper:3.4
+    environment:
+      ZK_MYID: 2
+      ZK_MAX_SERVERS: 3
+    restart: always
+  zookeeper-3:
+    image: sneck/zookeeper:3.4
+    environment:
+      ZK_MYID: 3
+      ZK_MAX_SERVERS: 3
+    restart: always
