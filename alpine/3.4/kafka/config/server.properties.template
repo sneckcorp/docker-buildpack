@@ -35,7 +35,7 @@ delete.topic.enable={{KAFKA_DELETE_TOPIC_ENABLE}}
 ############################# Socket Server Settings #############################
 
 # The port the socket server listens on
-port={{KAFKA_PORT}}
+port={{KAFKA_CLIENT_PORT}}
 advertised.port={{KAFKA_ADVERTISED_PORT}}
 
 ############################# Log Basics #############################
