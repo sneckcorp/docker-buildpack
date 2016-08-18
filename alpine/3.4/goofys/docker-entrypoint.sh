@@ -31,6 +31,11 @@ if [[ -z "$AWS_S3_BUCKET" ]]; then
   echo "Place set environment variables(AWS_S3_BUCKET)"
   exit 1;
 elif [[ -n "$AWS_S3_BUCKET" -a -n "$AWS_S3_PREFIX" ]]; then
+  if [[ $AWS_S3_PREFIX =~ ^/ ]]; then
+   AWS_S3_PREFIX=${AWS_S3_PREFIX:1}
+   echo "AWS_S3_PREFIX can not start with '/'."
+  fi
+
   GOOFYS_FROM_PATH="${AWS_S3_BUCKET}:${AWS_S3_PREFIX}"
 else
   GOOFYS_FROM_PATH="$AWS_S3_BUCKET"
