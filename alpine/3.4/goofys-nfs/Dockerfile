@@ -29,6 +29,6 @@ RUN apk add --no-cache openrc nfs-utils \
 
 ADD docker-entrypoint.sh /nfsd-entrypoint.sh
 
-EXPOSE 2049
+EXPOSE 2049 111/tcp 111/udp 20048
 
 ENTRYPOINT ["/sbin/init"]

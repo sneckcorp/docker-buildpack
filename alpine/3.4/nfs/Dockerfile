@@ -11,6 +11,6 @@ RUN apk add --no-cache nfs-utils \
 
 ADD docker-entrypoint.sh /entrypoint.sh
 
-EXPOSE 2049
+EXPOSE 2049 111/tcp 111/udp 20048
 
 ENTRYPOINT ["/sbin/init"]

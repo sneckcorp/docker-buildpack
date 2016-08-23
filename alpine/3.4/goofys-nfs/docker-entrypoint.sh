@@ -3,7 +3,6 @@
 # Goofys Entrypoint
 /entrypoint.sh &
 
-
 # waiting for goofy
 echo "Whating for goofys mount(${GOOFYS_MOUNT_PATH})"
 JOBS="`jobs`"
@@ -30,9 +29,9 @@ if [[ ! -d $GOOFYS_MOUNT_PATH ]]; then
 fi
 
 if [[ -z "$NFSD_EXPORTS" -a -n "$GOOFYS_MOUNT_PATH" ]]; then
-  NFSD_EXPORTS=${NFSD_EXPORTS:-"$GOOFYS_MOUNT_PATH *(rw,fsid=0,insecure,no_root_squash,sync,no_subtree_check)"}
+  NFSD_EXPORTS="$GOOFYS_MOUNT_PATH *(rw,fsid=0,insecure,no_root_squash,sync,no_subtree_check)"
 fi
 
 if [[ -n "$NFSD_EXPORTS" ]]; then
-  echo -e "$NFSD_EXPORTS" > /etc/exports
+  echo -e "$NFSD_EXPORTS" >> /etc/exports
 fi
