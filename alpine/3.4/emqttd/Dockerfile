@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 ARG EMQTTD_VERSION
 ENV EMQTTD_VERSION=${EMQTTD_VERSION:-master} \
-    EMQTTD_HOME=${EMQTTD_VERSION:-/usr/emqttd}
+    EMQTTD_HOME=${EMQTTD_HOME:-/opt/emqttd}
 
 RUN apk add --no-cache --virtual=build-dependencies wget git make erlang-dev erlang-syntax-tools erlang-eunit erlang-crypto erlang-reltool erlang-asn1 erlang-tools erlang-eldap erlang-inets erlang-mnesia erlang-observer erlang-os-mon erlang-public-key erlang-runtime-tools erlang-sasl erlang-ssl erlang-xmerl \
     && apk add --no-cache erlang \
@@ -22,11 +22,13 @@ RUN apk add --no-cache --virtual=build-dependencies wget git make erlang-dev erl
 
 ENV PATH=$PATH:$EMQTTD_HOME/bin
 
-VOLUME ["$EMQTTD_HOME/etc", "$EMQTTD_HOME/log"]
+ADD docker-entrypoint.sh /entrypoint.sh
+
+VOLUME ["$EMQTTD_HOME/etc", "$EMQTTD_HOME/log", "$EMQTTD_HOME/data"]
 
 WORKDIR $EMQTTD_HOME
 
 EXPOSE 1883 8883 8083 18083
 
-ENTRYPOINT ["emqttd"]
-CMD ["console"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["start-with-log"]
