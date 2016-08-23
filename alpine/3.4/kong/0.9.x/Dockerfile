@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 ARG KONG_VERSION
 
-ENV KONG_VERSION=${KONG_VERSION:-0.9.0rc4} \
+ENV KONG_VERSION=${KONG_VERSION:-0.9.0} \
     KONG_NGINX_DAEMON=off \
     PATH=/usr/local/openresty/bin:$PATH
     

@@ -48,11 +48,11 @@ docker build --tag sneck/sbt:0.13.11 --build-arg SBT_VERSION=0.13.11 sbt/
 docker build --tag sneck/sbt:0.13.12 --build-arg SBT_VERSION=0.13.12 sbt/
 
 # KONG
-docker build --tag sneck/kong:latest kong/0.8.x/
+docker build --tag sneck/kong:latest kong/0.9.x/
 docker build --tag sneck/kong:0.8 --build-arg KONG_VERSION=0.8.3 kong/0.8.x/
 docker build --tag sneck/kong:0.8.3 --build-arg KONG_VERSION=0.8.3 kong/0.8.x/
-docker build --tag sneck/kong:0.9 --build-arg KONG_VERSION=0.9.0rc4 kong/0.9.x/
-docker build --tag sneck/kong:0.9.0rc4 --build-arg KONG_VERSION=0.9.0rc4 kong/0.9.x/
+docker build --tag sneck/kong:0.9 --build-arg KONG_VERSION=0.9.0 kong/0.9.x/
+docker build --tag sneck/kong:0.9.0 --build-arg KONG_VERSION=0.9.0 kong/0.9.x/
 
 # ETCD
 docker build --tag sneck/etcd:latest etcd/
