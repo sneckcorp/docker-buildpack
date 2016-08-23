@@ -19,6 +19,7 @@ docker build --tag sneck/kafka:0.9.0 --build-arg KAFKA_VERSION=0.9.0.1 kafka/
 # EMQTT
 docker build --tag sneck/emqttd:latest emqttd/
 docker build --tag sneck/emqttd:1.1.2 --build-arg EMQTTD_VERSION=1.1.2 emqttd/
+docker build --tag sneck/emqttd:1.1.3 --build-arg EMQTTD_VERSION=1.1.3 emqttd/
 
 # OPEN RC
 docker build --tag sneck/openrc:latest openrc/ 
