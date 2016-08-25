@@ -4,7 +4,9 @@
 
 MISSING_VAR_MESSAGE="must be set"
 DEFAULT_AWS_REGION="us-west-2"
-DEFAULT_ZK_HOME=/tmp/zookeeper
+DEFAULT_ZK_HOME=/opt/zookeeper
+DEFAULT_DATA_DIR="${ZK_HOME:-$DEFAULT_ZK_HOME}/data"
+DEFAULT_LOG_DIR="${ZK_HOME:-$DEFAULT_ZK_HOME}/logs"
 DEFAULT_ZK_ENSEMBLE_SIZE=0
 
 S3_SECURITY=""
@@ -12,8 +14,8 @@ HTTP_PROXY=""
 : ${HOSTNAME:?$MISSING_VAR_MESSAGE}
 : ${AWS_REGION:=$DEFAULT_AWS_REGION}
 : ${ZK_HOME:=$DEFAULT_ZK_HOME}
-: ${ZK_DATA_DIR:="$ZK_HOME/data"}
-: ${ZK_LOG_DIR:="$ZK_HOME/logs"}
+: ${ZK_DATA_DIR:=$DEFAULT_DATA_DIR}
+: ${ZK_LOG_DIR:=$DEFAULT_LOG_DIR}
 : ${ZK_ENSEMBLE_SIZE:=$DEFAULT_ZK_ENSEMBLE_SIZE}
 : ${ZK_SERVERS:=""}
 : ${HTTP_PROXY_HOST:=""}
@@ -39,9 +41,11 @@ cat <<- EOF > $EXHIBITOR_HOME/defaults.conf
   auto-manage-instances-settling-period-ms=0
   auto-manage-instances=1
   auto-manage-instances-fixed-ensemble-size=$ZK_ENSEMBLE_SIZE
-  servers-spec=$ZK_SERVERS
 EOF
 
+if [[ -n "$ZK_SERVERS" ]]; then
+  echo "  servers-spec=${ZK_SERVERS}" >> $EXHIBITOR_HOME/defaults.conf
+fi
 
 if [[ -n ${AWS_ACCESS_KEY_ID} ]]; then
   cat <<- EOF > $EXHIBITOR_HOME/credentials.properties
@@ -66,7 +70,7 @@ fi
 
 
 if [[ -n $HTTP_PROXY_HOST ]]; then
-    cat <<- EOF > /opt/exhibitor/proxy.properties
+    cat <<- EOF > ${EXHIBITOR_HOME}/proxy.properties
       com.netflix.exhibitor.s3.proxy-host=${HTTP_PROXY_HOST}
       com.netflix.exhibitor.s3.proxy-port=${HTTP_PROXY_PORT}
       com.netflix.exhibitor.s3.proxy-username=${HTTP_PROXY_USERNAME}
@@ -75,7 +79,6 @@ EOF
 
     HTTP_PROXY="--s3proxy=${EXHIBITOR_HOME}/proxy.properties"
 fi
-
 
 exec 2>&1
 

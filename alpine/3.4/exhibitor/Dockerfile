@@ -5,7 +5,7 @@ ARG EXHIBITOR_VERSION
 ENV EXHIBITOR_VERSION=${EXHIBITOR_VERSION:-1.5.6} \
     EXHIBITOR_HOME=/opt/exhibitor
 
-COPY pom.xml /tmp/exhibitor/pom.xml
+ADD pom.xml /tmp/exhibitor/pom.xml
 RUN apk add --no-cache --virtual=build-dependencies wget \
     && apk add --no-cache bash \
     \
@@ -24,9 +24,10 @@ RUN apk add --no-cache --virtual=build-dependencies wget \
     && apk del build-dependencies \
     && rm -rf /tmp/*
 
-COPY web.xml $EXHIBITOR_HOME/web.xml
-COPY docker-entrypoint.sh /entrypoint.sh
+ADD web.xml $EXHIBITOR_HOME/web.xml
+ADD docker-entrypoint.sh /entrypoint.sh
 
 WORKDIR $EXHIBITOR_HOME
 EXPOSE 2181 2888 3888 8181
+
 ENTRYPOINT ["/entrypoint.sh"]
