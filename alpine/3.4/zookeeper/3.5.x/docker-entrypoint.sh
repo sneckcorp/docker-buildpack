@@ -10,7 +10,7 @@ then
 else
   : ${ZK_SERVERS:=$1}
   : ${ZK_MYID:=1}
-  IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$2}' | cut -d / -f 1`
+  IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | head -1 | awk '{print \$2}' | cut -d / -f 1`
 
   echo "standaloneEnabled=false" >> $ZK_HOME/conf/zoo.cfg
   echo "dynamicConfigFile=$ZK_HOME/conf/zoo.cfg.dynamic" >> $ZK_HOME/conf/zoo.cfg
