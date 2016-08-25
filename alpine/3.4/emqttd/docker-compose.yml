@@ -1,9 +1,11 @@
-emqttd:
-  image: sneck/emqttd
-  hostname: emqttd
-  ports:
-    - "1883:1883"
-    - "8883:8883"
-    - "8083:8083"
-    - "18083:18083"
-  restart: always
+version: '2'
+services:
+  emqttd:
+    image: sneck/emqttd
+    environment:
+      - EMQTTD_AUTO_CLUSTER_JOIN=true
+      - EMQTTD_BIND_NODE_NAME=ip
+    volumes:
+      - cluster:/opt/emqttd/cluster
+volumes:
+  cluster: {}
