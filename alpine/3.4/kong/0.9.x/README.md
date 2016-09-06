@@ -8,7 +8,7 @@ docker run -d --name kong-database \
 ```
 
 ```shell
-docker run -d --name kong
+docker run -d --name kong \
   --link kong-database \
   -p 8000:8000 \
   -p 8433:8433 \
