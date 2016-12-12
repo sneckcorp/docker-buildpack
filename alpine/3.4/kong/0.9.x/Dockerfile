@@ -2,10 +2,10 @@ FROM alpine:3.4
 
 ARG KONG_VERSION
 
-ENV KONG_VERSION=${KONG_VERSION:-0.9.0} \
+ENV KONG_VERSION=${KONG_VERSION:-0.9.1} \
     KONG_NGINX_DAEMON=off \
     PATH=/usr/local/openresty/bin:$PATH
-    
+
 RUN echo "==> Setting variables" \
     && OPENRESTY_PREFIX=/usr/local/openresty \
     && OPENRESTY_VERSION=1.9.15.1 \
@@ -78,7 +78,7 @@ RUN echo "==> Setting variables" \
     && apk del build-dependencies \
     && rm -rf "/tmp/"*
 
-EXPOSE 8000 8443 8001 7946
+EXPOSE 8000 8443 8001 7946 7373
 
 VOLUME ["/etc/kong"]
 

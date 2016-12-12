@@ -1,4 +1,4 @@
-FROM java:8-alpine
+FROM openjdk:8-alpine
 
 ARG SCALA_VERSION
 ARG SCALA_HOME

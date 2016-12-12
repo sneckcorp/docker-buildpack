@@ -1,4 +1,4 @@
-FROM java:8-alpine
+FROM openjdk:8-alpine
 
 ARG SBT_VERSION
 ENV SBT_VERSION=${SBT_VERSION:-0.13.12}

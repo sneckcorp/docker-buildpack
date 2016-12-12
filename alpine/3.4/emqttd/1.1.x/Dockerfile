@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 ARG EMQTTD_VERSION
-ENV EMQTTD_VERSION=${EMQTTD_VERSION:-master} \
+ENV EMQTTD_VERSION=${EMQTTD_VERSION:-1.1.3} \
     EMQTTD_HOME=${EMQTTD_HOME:-/opt/emqttd}
 
 RUN apk add --no-cache --virtual=build-dependencies wget git make erlang-dev erlang-syntax-tools erlang-eunit erlang-crypto erlang-reltool erlang-asn1 erlang-tools erlang-eldap erlang-inets erlang-mnesia erlang-observer erlang-os-mon erlang-public-key erlang-runtime-tools erlang-sasl erlang-ssl erlang-xmerl \

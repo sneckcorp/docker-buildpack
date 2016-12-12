@@ -18,11 +18,11 @@
 
 # The id of the broker. This must be set to a unique integer for each broker.
 broker.id={{KAFKA_BROKER_ID}}
-auto.leader.rebalance.enable=true
+auto.leader.rebalance.enable={{KAFKA_AUTO_LEADER_REBALANCE_ENABLE}}
 
 # Replication
-auto.create.topics.enable=true
-default.replication.factor=1
+auto.create.topics.enable={{KAFKA_AUTO_CREATE_TOPICS_ENABLE}}
+default.replication.factor={{KAFKA_DEFAULT_REPLICATION_FACTOR}}
 
 # Hostname the broker will advertise to consumers. If not set, kafka will use the value returned
 # from InetAddress.getLocalHost().  If there are multiple interfaces getLocalHost
@@ -46,7 +46,7 @@ log.dirs={{KAFKA_HOME}}/data
 
 # The number of logical partitions per topic per server. More partitions allow greater parallelism
 # for consumption, but also mean more files.
-num.partitions=1
+num.partitions={{KAFKA_NUM_PARTITIONS}}
 
 ############################# Log Retention Policy #############################
 
@@ -66,8 +66,8 @@ log.retention.hours=168
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
 zookeeper.connect={{ZOOKEEPER_CONNECTION_STRING}}{{ZOOKEEPER_CHROOT}}
-zookeeper.connection.timeout.ms=10000
-controlled.shutdown.enable=true
-zookeeper.session.timeout.ms=10000
+zookeeper.connection.timeout.ms={{KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS}}
+controlled.shutdown.enable={{KAFKA_CONTROLLED_SHUTDOWN_ENABLE}}
+zookeeper.session.timeout.ms={{KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS}}
 
 # vim:set filetype=jproperties
